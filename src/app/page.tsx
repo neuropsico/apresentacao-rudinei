@@ -36,6 +36,21 @@ export default function PresentationDashboardFinal() {
     }
   };
 
+  const [bgIndex, setBgIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setBgIndex((prev) => (prev + 1) % 3);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const slideImages = [
+    "/propostas/rudinei/bg_steelframe.png",
+    "/propostas/rudinei/bg_steelframe2.png",
+    "/propostas/rudinei/bg_steelframe3.png"
+  ];
+
   const nextScreen = useCallback(() => {
     setActiveAvatar(null);
     setCurrentScreen((prev) => Math.min(prev + 1, 3));
@@ -116,7 +131,17 @@ export default function PresentationDashboardFinal() {
     <main className="min-h-screen bg-zinc-900 text-zinc-300 font-[family-name:var(--font-inter)] selection:bg-cyan-900 selection:text-white flex flex-col items-center justify-center relative overflow-hidden">
       
       {/* Shiny Metallic Background */}
-      <div className={`absolute inset-0 transition-colors duration-1000 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] -z-20 ${backgrounds[currentScreen]}`}></div>
+      <div className={`absolute inset-0 transition-colors duration-1000 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] -z-30 ${backgrounds[currentScreen]}`}></div>
+      
+      {/* Cinematic Background for All Screens (Slideshow) */}
+      <div className={`absolute inset-0 transition-opacity duration-1000 -z-20 overflow-hidden pointer-events-none opacity-40 mix-blend-luminosity`}>
+        {slideImages.map((src, idx) => (
+          <div key={src} className={`absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] transition-opacity duration-1000 animate-pan ${bgIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
+            <Image src={src} alt="Steel Frame Panning" fill className="object-cover" priority={idx === 0} />
+          </div>
+        ))}
+        <div className="absolute inset-0 bg-black/50 z-20"></div>
+      </div>
       
       {/* Header (Logo bigger on top, slogan below) */}
       <header className="fixed top-0 w-full z-50 bg-zinc-900/70 backdrop-blur-3xl border-b border-zinc-700/50 shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
@@ -130,17 +155,17 @@ export default function PresentationDashboardFinal() {
             </div>
           </div>
           
-          <div className="flex gap-2 md:gap-4 overflow-x-auto pb-2 md:pb-0 hide-scrollbar font-[family-name:var(--font-space)] uppercase tracking-widest">
-            {["Visão Geral", "Mercado", "Soluções", "Proposta"].map((step, idx) => (
+          <nav className="hidden md:flex items-center gap-8 text-base font-medium tracking-wider text-zinc-500 uppercase">
+            {["Visão Geral", "Mercado", "Soluções", "Proposta"].map((item, idx) => (
               <button 
-                key={idx}
+                key={item} 
                 onClick={() => setCurrentScreen(idx)}
-                className={`text-[10px] md:text-xs px-5 py-2 rounded-md transition-all duration-500 whitespace-nowrap flex items-center gap-2 ${currentScreen === idx ? "bg-gradient-to-r from-cyan-900/40 to-blue-900/40 text-cyan-400 font-bold border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)]" : "text-zinc-500 hover:text-zinc-300"}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-md transition-all duration-500 ${currentScreen === idx ? "bg-cyan-950/40 text-cyan-400 border border-cyan-800/50 shadow-[0_0_15px_rgba(6,182,212,0.15)]" : "hover:text-cyan-400 hover:bg-zinc-800/50"}`}
               >
-                <span className="opacity-50 text-[8px]">{idx + 1}</span> {step}
+                <span className="opacity-50 text-[8px]">{idx + 1}</span> {item}
               </button>
             ))}
-          </div>
+          </nav>
         </div>
       </header>
 
@@ -148,13 +173,17 @@ export default function PresentationDashboardFinal() {
       <div className="w-full max-w-6xl h-full mt-32 flex items-center justify-center relative">
         
         {/* Screen 0: Cover */}
-        <div className={`absolute inset-0 flex flex-col items-center justify-center text-center p-8 transition-all duration-1000 ${currentScreen === 0 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
-          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-md text-cyan-400 text-xs tracking-[0.3em] uppercase font-bold mb-10 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-100 font-[family-name:var(--font-space)] shadow-[0_0_15px_rgba(6,182,212,0.1)]">
-            <Zap className="w-4 h-4 animate-pulse text-cyan-400" /> Projeto Estratégico Exclusivo
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-1000 ${currentScreen === 0 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
+          <div className="inline-flex items-center gap-2 px-6 py-2 border border-cyan-800/50 rounded-md text-sm font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/20 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <Zap className="w-4 h-4"/> PROJETO ESTRATÉGICO EXCLUSIVO
           </div>
           
           <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-bold tracking-tighter text-white mb-6 animate-in slide-in-from-bottom-8 fade-in duration-1000 delay-200 font-[family-name:var(--font-space)] leading-none uppercase">
-            NEW BUSINESS <br/>
+            <span className="relative inline-block overflow-hidden pb-2">
+              NEW BUSINESS
+              <span className="absolute top-0 left-[-100%] w-[40%] h-full bg-gradient-to-r from-transparent via-white to-transparent opacity-80 skew-x-[-20deg] animate-[laser_3s_ease-in-out_infinite]"></span>
+            </span>
+            <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 via-cyan-300 to-zinc-500 animate-shine drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
               RUDINEI
             </span>

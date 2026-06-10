@@ -24,3 +24,30 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@layer utilities {
+  .animate-shine {
+    background-size: 200% auto;
+    animation: shine 3s linear infinite;
+  }
+  .animate-pan {
+    animation: pan 40s linear infinite alternate;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes pan {
+  from { transform: scale(1.1) translate(0, 0); }
+  to { transform: scale(1.1) translate(-2%, -2%); }
+}
+
+@keyframes laser {
+  0% { left: -100%; }
+  20% { left: 200%; }
+  100% { left: 200%; }
+}
