@@ -26,9 +26,13 @@ export default function PresentationDashboardFinal() {
   const [passwordInput, setPasswordInput] = useState("");
   const [authError, setAuthError] = useState(false);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (passwordInput === "rudinei2026") {
+    // Usa o valor direto do DOM (útil para preenchimento automático do Chrome) ou o estado
+    const input = e.currentTarget.querySelector('input[type="password"]') as HTMLInputElement;
+    const pwd = input?.value || passwordInput;
+
+    if (pwd === "rudinei2026") {
       setIsAuthenticated(true);
     } else {
       setAuthError(true);
@@ -223,7 +227,9 @@ export default function PresentationDashboardFinal() {
         <div className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-1000 ${currentScreen === 2 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
           
           <div className={`transition-all duration-700 w-full max-w-6xl flex flex-col ${activeAvatar ? "blur-xl opacity-0 scale-95 pointer-events-none" : "blur-0 opacity-100 scale-100 pointer-events-auto"}`}>
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-in slide-in-from-bottom-8 fade-in duration-700 font-[family-name:var(--font-space)] uppercase tracking-tighter">O Ecossistema</h2>
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-in slide-in-from-bottom-8 fade-in duration-700 font-[family-name:var(--font-space)] uppercase tracking-tighter">
+              O ECOSSISTEMA DE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">NEUROMARKETING</span>
+            </h2>
             <p className="text-2xl text-zinc-400 mb-12 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-100 font-light">Pilares da máquina de vendas.</p>
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
