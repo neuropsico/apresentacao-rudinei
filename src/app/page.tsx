@@ -12,7 +12,10 @@ import {
   Search,
   Camera,
   MonitorSmartphone,
-  Zap
+  Zap,
+  Star,
+  Handshake,
+  Trophy
 } from "lucide-react";
 
 export default function PresentationDashboardFinal() {
@@ -214,8 +217,13 @@ export default function PresentationDashboardFinal() {
                       <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">A Sede Digital.</h3>
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Carregamento ultrarrápido, visual corporativo escuro (Metálico). Especificações técnicas das vigas, catálogo de galpões pré-moldados e funil direto pro seu WhatsApp.</p>
                     </div>
-                    <div className="w-full md:w-96 h-[600px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] flex items-center justify-center bg-black">
-                      <Image src="/site.png" alt="Site Institucional" fill className="object-cover opacity-90 hover:opacity-100 transition-opacity duration-700" />
+                    <div className="w-full md:w-[500px] lg:w-[600px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] flex flex-col bg-black group">
+                      <iframe src="/preview" className="w-full h-full border-none z-0" title="Preview do Site"></iframe>
+                      <div className="absolute bottom-6 right-6 z-20">
+                        <a href="/preview" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-black px-6 py-3 text-sm font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2 rounded-sm shadow-lg border border-cyan-400">
+                          Navegar <MonitorSmartphone className="w-4 h-4"/>
+                        </a>
+                      </div>
                     </div>
                   </div>
                 )}
@@ -234,7 +242,10 @@ export default function PresentationDashboardFinal() {
               <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-200">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Essencial</h3>
                 <p className="text-zinc-400 text-base mb-8 h-12">O alicerce básico para a marca.</p>
-                <div className="text-5xl font-bold text-zinc-300 mb-8 tracking-tighter font-[family-name:var(--font-space)]">R$ 6.000</div>
+                <div className="mb-8">
+                  <div className="text-sm text-zinc-500 line-through font-mono">de R$ 7.900</div>
+                  <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 5.890</div>
+                </div>
                 <div className="w-full h-[1px] bg-zinc-700 mb-8"></div>
                 <ul className="space-y-4 text-zinc-300 text-base flex-1">
                   <li className="flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-zinc-500"/> Identidade Visual</li>
@@ -249,7 +260,10 @@ export default function PresentationDashboardFinal() {
                 </div>
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight mt-2">Autoridade</h3>
                 <p className="text-cyan-100 text-base mb-8 h-12">O ecossistema para fechar galpões pesados.</p>
-                <div className="text-6xl font-bold text-white mb-8 tracking-tighter font-[family-name:var(--font-space)] drop-shadow-lg">R$ 8.000</div>
+                <div className="mb-8">
+                  <div className="text-base text-cyan-200/50 line-through font-mono">de R$ 12.700</div>
+                  <div className="text-6xl font-bold text-white tracking-tighter font-[family-name:var(--font-space)] drop-shadow-lg">R$ 8.960</div>
+                </div>
                 <div className="w-full h-[1px] bg-cyan-900 mb-8"></div>
                 <ul className="space-y-4 text-white text-base flex-1 font-medium">
                   <li className="flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-cyan-400"/> Tudo do Pacote Essencial</li>
@@ -261,7 +275,10 @@ export default function PresentationDashboardFinal() {
               <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-400">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Domínio</h3>
                 <p className="text-zinc-400 text-base mb-8 h-12">Máquina de vendas massiva regional.</p>
-                <div className="text-5xl font-bold text-zinc-300 mb-8 tracking-tighter font-[family-name:var(--font-space)]">R$ 15.000</div>
+                <div className="mb-8">
+                  <div className="text-sm text-zinc-500 line-through font-mono">de R$ 18.400</div>
+                  <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 15.890</div>
+                </div>
                 <div className="w-full h-[1px] bg-zinc-700 mb-8"></div>
                 <ul className="space-y-4 text-zinc-300 text-base flex-1">
                   <li className="flex items-center gap-3"><MonitorSmartphone className="w-5 h-5 text-zinc-500"/> Tudo pacote Autoridade</li>
@@ -270,6 +287,28 @@ export default function PresentationDashboardFinal() {
                 </ul>
               </div>
             </div>
+
+            {/* Partnership Clause */}
+            <div className="mt-12 max-w-4xl mx-auto bg-zinc-800/40 border border-zinc-700/50 backdrop-blur-md p-6 rounded-lg flex flex-col md:flex-row items-center justify-between gap-6 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-500">
+              <div className="flex items-center gap-4">
+                <ShieldCheck className="w-8 h-8 text-cyan-400 animate-pulse" />
+                <div>
+                  <h4 className="text-xl font-bold text-white font-[family-name:var(--font-space)] tracking-tight">Condição de Parceria (Longo Prazo)</h4>
+                  <p className="text-zinc-400 text-sm">Cláusula de orçamento diferenciado para clientes parceiros corporativos.</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400/20 animate-pulse" style={{animationDelay: '0ms'}} />
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400/20 animate-pulse" style={{animationDelay: '100ms'}} />
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400/20 animate-pulse" style={{animationDelay: '200ms'}} />
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400/20 animate-pulse" style={{animationDelay: '300ms'}} />
+                <Star className="w-5 h-5 text-amber-400 fill-amber-400/20 animate-pulse" style={{animationDelay: '400ms'}} />
+                <div className="w-px h-8 bg-zinc-700 mx-2"></div>
+                <Handshake className="w-6 h-6 text-cyan-500 animate-pulse" />
+                <Trophy className="w-6 h-6 text-yellow-500 animate-pulse" />
+              </div>
+            </div>
+
           </div>
         </div>
 
