@@ -298,9 +298,9 @@ export default function PresentationDashboardFinal() {
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Carregamento ultrarrápido, visual corporativo escuro (Metálico). Especificações técnicas das vigas, catálogo de galpões pré-moldados e funil direto pro seu WhatsApp.</p>
                     </div>
                     <div className="w-full md:w-[500px] lg:w-[600px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] flex flex-col bg-black group">
-                      <iframe src="/preview" className="w-full h-full border-none z-0" title="Preview do Site"></iframe>
+                      <iframe src="/propostas/rudinei/preview" className="w-full h-full border-none z-0" title="Preview do Site"></iframe>
                       <div className="absolute bottom-6 right-6 z-20">
-                        <a href="/preview" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-black px-6 py-3 text-sm font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2 rounded-sm shadow-lg border border-cyan-400">
+                        <a href="/propostas/rudinei/preview" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-black px-6 py-3 text-sm font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2 rounded-sm shadow-lg border border-cyan-400">
                           Navegar <MonitorSmartphone className="w-4 h-4"/>
                         </a>
                       </div>
