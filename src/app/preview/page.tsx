@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { ShieldCheck, ChevronRight, Menu, Zap, TrendingUp, MonitorSmartphone } from "lucide-react";
 
 export default function PreviewSite() {
@@ -37,12 +38,11 @@ export default function PreviewSite() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center pt-20">
-        {/* Background Image / Gradient */}
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-zinc-900/80 to-black z-10"></div>
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.1)_0%,transparent_50%)] z-10"></div>
-          {/* Faux architectural grid background */}
-          <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)', backgroundSize: '50px 50px' }}></div>
+          <Image src="/steelframe_hero.png" alt="Steel Frame" fill className="object-cover" priority />
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/40 z-10"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.08)_0%,transparent_60%)] z-10"></div>
         </div>
 
         <div className="container mx-auto px-6 relative z-20">

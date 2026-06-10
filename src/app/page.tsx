@@ -36,21 +36,6 @@ export default function PresentationDashboardFinal() {
     }
   };
 
-  const [bgIndex, setBgIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setBgIndex((prev) => (prev + 1) % 3);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const slideImages = [
-    "/propostas/rudinei/bg_steelframe.png",
-    "/propostas/rudinei/bg_steelframe2.png",
-    "/propostas/rudinei/bg_steelframe3.png"
-  ];
-
   const nextScreen = useCallback(() => {
     setActiveAvatar(null);
     setCurrentScreen((prev) => Math.min(prev + 1, 3));
@@ -133,14 +118,12 @@ export default function PresentationDashboardFinal() {
       {/* Shiny Metallic Background */}
       <div className={`absolute inset-0 transition-colors duration-1000 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] -z-30 ${backgrounds[currentScreen]}`}></div>
       
-      {/* Cinematic Background for All Screens (Slideshow) */}
-      <div className={`absolute inset-0 transition-opacity duration-1000 -z-20 overflow-hidden pointer-events-none opacity-40 mix-blend-luminosity`}>
-        {slideImages.map((src, idx) => (
-          <div key={src} className={`absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] transition-opacity duration-1000 animate-pan ${bgIndex === idx ? 'opacity-100 z-10' : 'opacity-0 z-0'}`}>
-            <Image src={src} alt="Steel Frame Panning" fill className="object-cover" priority={idx === 0} />
-          </div>
-        ))}
-        <div className="absolute inset-0 bg-black/50 z-20"></div>
+      {/* Cinematic Background for All Screens (CSS Panning Image) */}
+      <div className={`absolute inset-0 transition-opacity duration-1000 -z-20 overflow-hidden pointer-events-none opacity-15 mix-blend-luminosity`}>
+        <div className="absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] animate-pan">
+          <Image src="/steelframe_bg_light.png" alt="Steel Frame Panning" fill className="object-cover" priority />
+        </div>
+        <div className="absolute inset-0 bg-black/30 z-20"></div>
       </div>
       
       {/* Header (Logo bigger on top, slogan below) */}
@@ -321,7 +304,11 @@ export default function PresentationDashboardFinal() {
             <div className="grid md:grid-cols-3 gap-8 w-full">
               <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-200">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Essencial</h3>
-                <p className="text-zinc-400 text-base mb-8 h-12">O alicerce básico para a marca.</p>
+                <p className="text-zinc-400 text-base mb-4 h-12">O alicerce básico para a marca.</p>
+                <div className="inline-flex items-center gap-2 mb-6 bg-zinc-700/50 border border-zinc-600 px-3 py-1.5 rounded-sm w-fit">
+                  <span className="text-cyan-400 text-lg">⏱</span>
+                  <span className="text-xs font-bold tracking-widest uppercase text-zinc-300">Entrega em <span className="text-white">1 semana</span></span>
+                </div>
                 <div className="mb-8">
                   <div className="text-sm text-zinc-500 line-through font-mono">de R$ 7.900</div>
                   <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 5.890</div>
@@ -339,7 +326,11 @@ export default function PresentationDashboardFinal() {
                   ALTO IMPACTO
                 </div>
                 <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight mt-2">Autoridade</h3>
-                <p className="text-cyan-100 text-base mb-8 h-12">O ecossistema para fechar galpões pesados.</p>
+                <p className="text-cyan-100 text-base mb-4 h-12">O ecossistema para fechar galpões pesados.</p>
+                <div className="inline-flex items-center gap-2 mb-6 bg-cyan-950/60 border border-cyan-700/50 px-3 py-1.5 rounded-sm w-fit">
+                  <span className="text-cyan-400 text-lg">⏱</span>
+                  <span className="text-xs font-bold tracking-widest uppercase text-cyan-100">Entrega em <span className="text-white">15 dias</span></span>
+                </div>
                 <div className="mb-8">
                   <div className="text-base text-cyan-200/50 line-through font-mono">de R$ 12.700</div>
                   <div className="text-6xl font-bold text-white tracking-tighter font-[family-name:var(--font-space)] drop-shadow-lg">R$ 8.960</div>
@@ -354,7 +345,11 @@ export default function PresentationDashboardFinal() {
 
               <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-400">
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Líder de Mercado</h3>
-                <p className="text-zinc-400 text-base mb-8 h-12">Máquina de vendas massiva regional.</p>
+                <p className="text-zinc-400 text-base mb-4 h-12">Máquina de vendas massiva regional.</p>
+                <div className="inline-flex items-center gap-2 mb-6 bg-zinc-700/50 border border-zinc-600 px-3 py-1.5 rounded-sm w-fit">
+                  <span className="text-cyan-400 text-lg">⏱</span>
+                  <span className="text-xs font-bold tracking-widest uppercase text-zinc-300">Entrega em <span className="text-white">1 mês</span></span>
+                </div>
                 <div className="mb-8">
                   <div className="text-sm text-zinc-500 line-through font-mono">de R$ 18.400</div>
                   <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 15.890</div>
