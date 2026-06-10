@@ -265,7 +265,6 @@ export default function PresentationDashboardFinal() {
                   FECHAR ✕
                 </button>
 
-                {/* Similar content as before but using the cyan gradient for accents */}
                 {activeAvatar === 1 && (
                   <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
                     <div className="flex-1 space-y-6">
@@ -274,23 +273,56 @@ export default function PresentationDashboardFinal() {
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Nomes imponentes. Nada de serralheria de bairro. Uma identidade geométrica, pesada, feita em aço digital. O cliente B2B precisa sentir que você dá conta de erguer 5 mil metros quadrados de galpão.</p>
                     </div>
                     <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                      <Image src="/identidade.png" alt="Identidade" fill className="object-cover" />
+                      <Image src="/identidade.png" alt="Identidade Visual Rudinei" fill className="object-cover" />
                     </div>
                   </div>
                 )}
-                {/* ... other avatars omitted for brevity, adding similar accents ... */}
+                {activeAvatar === 2 && (
+                  <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
+                    <div className="flex-1 space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-800 rounded-sm text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/30"><Search className="w-4 h-4"/> 02. Google</div>
+                      <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">Dono das Buscas.</h3>
+                      <p className="text-xl text-zinc-400 leading-relaxed font-light">Quando um diretor industrial digitar "galpão steel frame Araquari" no Google, o seu nome aparece primeiro. Ficha técnica completa, avaliações 5 estrelas e fotos profissionais de obra — tudo configurado para fechar o lead antes da ligação.</p>
+                    </div>
+                    <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                      <Image src="/google.png" alt="Google Meu Negócio" fill className="object-cover" />
+                    </div>
+                  </div>
+                )}
+                {activeAvatar === 3 && (
+                  <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
+                    <div className="flex-1 space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-800 rounded-sm text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/30"><Camera className="w-4 h-4"/> 03. Instagram</div>
+                      <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">O Portfólio Vivo.</h3>
+                      <p className="text-xl text-zinc-400 leading-relaxed font-light">Grid curado com fotos de obra, drone e detalhes estruturais. Cada post é uma prova social visual para o decisor de compra. Antes de contratar qualquer construtora, ele vai olhar seu Instagram. E vai ficar impressionado.</p>
+                    </div>
+                    <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                      <Image src="/instagram.png" alt="Instagram Rudinei" fill className="object-cover" />
+                    </div>
+                  </div>
+                )}
                 {activeAvatar === 4 && (
                   <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
                     <div className="flex-1 space-y-6">
                       <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-800 rounded-sm text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/30"><MonitorSmartphone className="w-4 h-4"/> 04. Web App</div>
                       <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">A Sede Digital.</h3>
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Carregamento ultrarrápido, visual corporativo escuro (Metálico). Especificações técnicas das vigas, catálogo de galpões pré-moldados e funil direto pro seu WhatsApp.</p>
+                      <a href="/propostas/rudinei/preview" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-cyan-500 text-black px-8 py-4 font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors rounded-sm shadow-lg">
+                        Abrir Site Completo <MonitorSmartphone className="w-5 h-5"/>
+                      </a>
                     </div>
-                    <div className="w-full md:w-[500px] lg:w-[600px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] flex flex-col bg-black group">
-                      <iframe src="/propostas/rudinei/preview" className="w-full h-full border-none z-0" title="Preview do Site"></iframe>
-                      <div className="absolute bottom-6 right-6 z-20">
-                        <a href="/propostas/rudinei/preview" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-black px-6 py-3 text-sm font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2 rounded-sm shadow-lg border border-cyan-400">
-                          Navegar <MonitorSmartphone className="w-4 h-4"/>
+                    <div className="w-full md:w-[500px] lg:w-[600px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] bg-zinc-900">
+                      <Image src="/steelframe_hero.png" alt="Site Preview" fill className="object-cover opacity-40" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-8">
+                        <div className="flex items-center gap-3">
+                          <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center rounded-sm rotate-45">
+                            <span className="font-black text-black -rotate-45 text-xs">R</span>
+                          </div>
+                          <span className="font-black text-2xl tracking-tighter text-white uppercase">RUDINEI <span className="text-cyan-400 font-light">ENG.</span></span>
+                        </div>
+                        <p className="text-zinc-300 text-center text-lg">Site completo com hero slider, portfólio, serviços, CTA e rodapé profissional.</p>
+                        <a href="/propostas/rudinei/preview" target="_blank" rel="noopener noreferrer" className="bg-cyan-500 text-black px-8 py-4 font-bold tracking-wider uppercase hover:bg-cyan-400 transition-colors flex items-center gap-2 rounded-sm">
+                          Ver Site do Rudinei <MonitorSmartphone className="w-5 h-5"/>
                         </a>
                       </div>
                     </div>
