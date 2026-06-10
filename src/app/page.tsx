@@ -15,12 +15,26 @@ import {
   Zap,
   Star,
   Handshake,
-  Trophy
+  Trophy,
+  Lock
 } from "lucide-react";
 
 export default function PresentationDashboardFinal() {
   const [currentScreen, setCurrentScreen] = useState(0);
   const [activeAvatar, setActiveAvatar] = useState<number | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [passwordInput, setPasswordInput] = useState("");
+  const [authError, setAuthError] = useState(false);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (passwordInput === "rudinei2026") {
+      setIsAuthenticated(true);
+    } else {
+      setAuthError(true);
+      setTimeout(() => setAuthError(false), 2000);
+    }
+  };
 
   const nextScreen = useCallback(() => {
     setActiveAvatar(null);
@@ -60,6 +74,43 @@ export default function PresentationDashboardFinal() {
     "from-gray-800 via-zinc-900 to-slate-950",
     "from-zinc-700 via-zinc-800 to-zinc-950", 
   ];
+
+  if (!isAuthenticated) {
+    return (
+      <main className="min-h-screen bg-black flex items-center justify-center relative overflow-hidden font-[family-name:var(--font-space)] selection:bg-cyan-900 selection:text-white">
+        <div className="absolute inset-0 z-0">
+          <Image src="/propostas/rudinei/bg_steelframe.png" alt="Steel Frame" fill className="object-cover opacity-30 mix-blend-luminosity" priority />
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent"></div>
+        </div>
+        <div className="relative z-10 w-full max-w-md p-6">
+          <div className="bg-zinc-900/60 backdrop-blur-2xl border border-zinc-700/50 p-10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.5)] animate-in zoom-in-95 fade-in duration-700">
+            <div className="flex justify-center mb-8">
+              <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(6,182,212,0.4)]">
+                <Lock className="w-8 h-8 text-black" />
+              </div>
+            </div>
+            <h2 className="text-3xl font-bold text-white text-center mb-2 tracking-tighter uppercase">Acesso Restrito</h2>
+            <p className="text-zinc-400 text-center mb-8 font-light">Insira a credencial da proposta.</p>
+            <form onSubmit={handleLogin} className="space-y-6">
+              <div>
+                <input 
+                  type="password" 
+                  value={passwordInput}
+                  onChange={(e) => setPasswordInput(e.target.value)}
+                  placeholder="Senha de acesso" 
+                  className={`w-full bg-black/50 border ${authError ? 'border-red-500' : 'border-zinc-700'} rounded-lg px-4 py-4 text-white focus:outline-none focus:border-cyan-500 transition-colors tracking-widest text-center`}
+                  autoFocus
+                />
+              </div>
+              <button type="submit" className="w-full bg-cyan-500 text-black font-bold py-4 rounded-lg uppercase tracking-wider hover:bg-cyan-400 transition-colors">
+                Desbloquear Proposta
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-zinc-900 text-zinc-300 font-[family-name:var(--font-inter)] selection:bg-cyan-900 selection:text-white flex flex-col items-center justify-center relative overflow-hidden">
