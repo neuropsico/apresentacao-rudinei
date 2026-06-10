@@ -103,7 +103,7 @@ export default function PresentationDashboardFinal() {
           </div>
           
           <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-bold tracking-tighter text-white mb-6 animate-in slide-in-from-bottom-8 fade-in duration-1000 delay-200 font-[family-name:var(--font-space)] leading-none uppercase">
-            ARQUITETURA <br/>
+            NEW BUSINESS <br/>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 via-cyan-300 to-zinc-500 animate-shine drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
               RUDINEI
             </span>
