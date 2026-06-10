@@ -72,7 +72,7 @@ export default function PresentationDashboardFinal() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="flex flex-col items-start gap-1">
             <div className="relative w-48 h-12 md:w-56 md:h-14 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-105 transition-transform duration-500">
-              <Image src="/logo-produza.png" alt="Logo Produza" fill className="object-contain object-left" />
+              <Image src="/propostas/rudinei/logo-produza.png" alt="Logo Produza" fill className="object-contain object-left" />
             </div>
             <div className="text-xs md:text-sm text-zinc-400 font-medium tracking-wide">
               Neuromarketing para pessoas e marcas.
@@ -273,7 +273,7 @@ export default function PresentationDashboardFinal() {
               </div>
 
               <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-400">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Domínio</h3>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Líder de Mercado</h3>
                 <p className="text-zinc-400 text-base mb-8 h-12">Máquina de vendas massiva regional.</p>
                 <div className="mb-8">
                   <div className="text-sm text-zinc-500 line-through font-mono">de R$ 18.400</div>
