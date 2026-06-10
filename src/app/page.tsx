@@ -125,7 +125,7 @@ export default function PresentationDashboardFinal() {
       {/* Cinematic Background for All Screens (CSS Panning Image) */}
       <div className={`absolute inset-0 transition-opacity duration-1000 -z-20 overflow-hidden pointer-events-none opacity-15 mix-blend-luminosity`}>
         <div className="absolute inset-0 w-[110%] h-[110%] -top-[5%] -left-[5%] animate-pan">
-          <Image src="/steelframe_bg_light.png" alt="Steel Frame Panning" fill className="object-cover" priority />
+          <Image src="/propostas/rudinei/steelframe_bg_light.png" alt="Steel Frame Panning" fill className="object-cover" priority />
         </div>
         <div className="absolute inset-0 bg-black/30 z-20"></div>
       </div>
@@ -273,7 +273,7 @@ export default function PresentationDashboardFinal() {
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Nomes imponentes. Nada de serralheria de bairro. Uma identidade geométrica, pesada, feita em aço digital. O cliente B2B precisa sentir que você dá conta de erguer 5 mil metros quadrados de galpão.</p>
                     </div>
                     <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                      <Image src="/identidade.png" alt="Identidade Visual Rudinei" fill className="object-cover" />
+                      <Image src="/propostas/rudinei/identidade.png" alt="Identidade Visual Rudinei" fill className="object-cover" />
                     </div>
                   </div>
                 )}
@@ -285,7 +285,7 @@ export default function PresentationDashboardFinal() {
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Quando um diretor industrial digitar "galpão steel frame Araquari" no Google, o seu nome aparece primeiro. Ficha técnica completa, avaliações 5 estrelas e fotos profissionais de obra — tudo configurado para fechar o lead antes da ligação.</p>
                     </div>
                     <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                      <Image src="/google.png" alt="Google Meu Negócio" fill className="object-cover" />
+                      <Image src="/propostas/rudinei/google.png" alt="Google Meu Negócio" fill className="object-cover" />
                     </div>
                   </div>
                 )}
@@ -297,7 +297,7 @@ export default function PresentationDashboardFinal() {
                       <p className="text-xl text-zinc-400 leading-relaxed font-light">Grid curado com fotos de obra, drone e detalhes estruturais. Cada post é uma prova social visual para o decisor de compra. Antes de contratar qualquer construtora, ele vai olhar seu Instagram. E vai ficar impressionado.</p>
                     </div>
                     <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                      <Image src="/instagram.png" alt="Instagram Rudinei" fill className="object-cover" />
+                      <Image src="/propostas/rudinei/instagram.png" alt="Instagram Rudinei" fill className="object-cover" />
                     </div>
                   </div>
                 )}
@@ -312,7 +312,7 @@ export default function PresentationDashboardFinal() {
                       </a>
                     </div>
                     <div className="w-full md:w-[500px] lg:w-[600px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] bg-zinc-900">
-                      <Image src="/steelframe_hero.png" alt="Site Preview" fill className="object-cover opacity-40" />
+                      <Image src="/propostas/rudinei/steelframe_hero.png" alt="Site Preview" fill className="object-cover opacity-40" />
                       <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 p-8">
                         <div className="flex items-center gap-3">
                           <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-blue-600 flex items-center justify-center rounded-sm rotate-45">
@@ -349,7 +349,7 @@ export default function PresentationDashboardFinal() {
                 </div>
                 <div className="mb-8">
                   <div className="text-sm text-zinc-500 line-through font-mono">de R$ 7.900</div>
-                  <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 5.890</div>
+                  <div className="text-5xl font-bold text-zinc-300 tracking-tighter font-[family-name:var(--font-space)]">R$ 5.980</div>
                 </div>
                 <div className="w-full h-[1px] bg-zinc-700 mb-8"></div>
                 <ul className="space-y-4 text-zinc-300 text-base flex-1">
@@ -397,6 +397,7 @@ export default function PresentationDashboardFinal() {
                   <li className="flex items-center gap-3"><MonitorSmartphone className="w-5 h-5 text-zinc-500"/> Tudo pacote Autoridade</li>
                   <li className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-zinc-500"/> Tráfego Pago Pesado</li>
                   <li className="flex items-center gap-3"><Target className="w-5 h-5 text-zinc-500"/> Máquina SEO Lead</li>
+                  <li className="flex items-center gap-3"><Zap className="w-5 h-5 text-cyan-400"/> Vídeo Comercial 1min30</li>
                 </ul>
               </div>
             </div>
