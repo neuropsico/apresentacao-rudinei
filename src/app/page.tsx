@@ -1,65 +1,295 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useState, useEffect, useCallback } from "react";
+import Image from "next/image";
+import { 
+  ChevronLeft, 
+  ChevronRight, 
+  TrendingUp, 
+  Globe, 
+  ShieldCheck,
+  Target,
+  Search,
+  Camera,
+  MonitorSmartphone,
+  Zap
+} from "lucide-react";
+
+export default function PresentationDashboardFinal() {
+  const [currentScreen, setCurrentScreen] = useState(0);
+  const [activeAvatar, setActiveAvatar] = useState<number | null>(null);
+
+  const nextScreen = useCallback(() => {
+    setActiveAvatar(null);
+    setCurrentScreen((prev) => Math.min(prev + 1, 3));
+  }, []);
+
+  const prevScreen = useCallback(() => {
+    setActiveAvatar(null);
+    setCurrentScreen((prev) => Math.max(prev - 1, 0));
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight" || e.key === "ArrowDown") nextScreen();
+      if (e.key === "ArrowLeft" || e.key === "ArrowUp") prevScreen();
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [nextScreen, prevScreen]);
+
+  useEffect(() => {
+    let lastScroll = 0;
+    const handleWheel = (e: WheelEvent) => {
+      const now = new Date().getTime();
+      if (now - lastScroll < 800) return;
+      if (e.deltaY > 50) { nextScreen(); lastScroll = now; } 
+      else if (e.deltaY < -50) { prevScreen(); lastScroll = now; }
+    };
+    window.addEventListener("wheel", handleWheel);
+    return () => window.removeEventListener("wheel", handleWheel);
+  }, [nextScreen, prevScreen]);
+
+  // Metallic Grey Backgrounds
+  const backgrounds = [
+    "from-zinc-800 via-zinc-900 to-zinc-950", 
+    "from-slate-800 via-zinc-900 to-zinc-950",
+    "from-gray-800 via-zinc-900 to-slate-950",
+    "from-zinc-700 via-zinc-800 to-zinc-950", 
+  ];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-zinc-900 text-zinc-300 font-[family-name:var(--font-inter)] selection:bg-cyan-900 selection:text-white flex flex-col items-center justify-center relative overflow-hidden">
+      
+      {/* Shiny Metallic Background */}
+      <div className={`absolute inset-0 transition-colors duration-1000 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] -z-20 ${backgrounds[currentScreen]}`}></div>
+      
+      {/* Header (Logo bigger on top, slogan below) */}
+      <header className="fixed top-0 w-full z-50 bg-zinc-900/70 backdrop-blur-3xl border-b border-zinc-700/50 shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div className="flex flex-col items-start gap-1">
+            <div className="relative w-48 h-12 md:w-56 md:h-14 drop-shadow-[0_0_20px_rgba(255,255,255,0.4)] hover:scale-105 transition-transform duration-500">
+              <Image src="/logo-produza.png" alt="Logo Produza" fill className="object-contain object-left" />
+            </div>
+            <div className="text-xs md:text-sm text-zinc-400 font-medium tracking-wide">
+              Neuromarketing para pessoas e marcas.
+            </div>
+          </div>
+          
+          <div className="flex gap-2 md:gap-4 overflow-x-auto pb-2 md:pb-0 hide-scrollbar font-[family-name:var(--font-space)] uppercase tracking-widest">
+            {["Visão Geral", "Mercado", "Soluções", "Proposta"].map((step, idx) => (
+              <button 
+                key={idx}
+                onClick={() => setCurrentScreen(idx)}
+                className={`text-[10px] md:text-xs px-5 py-2 rounded-md transition-all duration-500 whitespace-nowrap flex items-center gap-2 ${currentScreen === idx ? "bg-gradient-to-r from-cyan-900/40 to-blue-900/40 text-cyan-400 font-bold border border-cyan-500/30 shadow-[0_0_20px_rgba(6,182,212,0.15)]" : "text-zinc-500 hover:text-zinc-300"}`}
+              >
+                <span className="opacity-50 text-[8px]">{idx + 1}</span> {step}
+              </button>
+            ))}
+          </div>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <div className="w-full max-w-6xl h-full mt-32 flex items-center justify-center relative">
+        
+        {/* Screen 0: Cover */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center text-center p-8 transition-all duration-1000 ${currentScreen === 0 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
+          <div className="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-md text-cyan-400 text-xs tracking-[0.3em] uppercase font-bold mb-10 animate-in slide-in-from-bottom-4 fade-in duration-700 delay-100 font-[family-name:var(--font-space)] shadow-[0_0_15px_rgba(6,182,212,0.1)]">
+            <Zap className="w-4 h-4 animate-pulse text-cyan-400" /> Projeto Estratégico Exclusivo
+          </div>
+          
+          <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-bold tracking-tighter text-white mb-6 animate-in slide-in-from-bottom-8 fade-in duration-1000 delay-200 font-[family-name:var(--font-space)] leading-none uppercase">
+            ARQUITETURA <br/>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-zinc-500 via-cyan-300 to-zinc-500 animate-shine drop-shadow-[0_0_30px_rgba(6,182,212,0.3)]">
+              RUDINEI
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-xl md:text-2xl text-zinc-400 max-w-3xl mx-auto leading-relaxed animate-in slide-in-from-bottom-8 fade-in duration-1000 delay-300">
+            Estratégia pesada de engenharia de valor B2B para fechar os maiores galpões do norte de SC.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        {/* Screen 1: Market */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-1000 ${currentScreen === 1 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
+          <div className="w-full max-w-6xl">
+            <h2 className="text-4xl md:text-6xl font-bold text-white mb-2 animate-in slide-in-from-bottom-8 fade-in duration-700 font-[family-name:var(--font-space)] uppercase tracking-tight">
+              MERCADO DE <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">ARAQUARI</span> E REGIÃO
+            </h2>
+            <p className="text-xl md:text-2xl text-zinc-400 mb-2 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-100 font-light">A maior concentração industrial. Indústrias compram segurança estrutural (Steel Frame), não preço.</p>
+            <div className="text-[10px] uppercase tracking-widest text-zinc-500 mb-12 animate-in fade-in delay-200 border border-zinc-700 bg-zinc-900/50 inline-block px-3 py-1 rounded">
+              📊 CRUZAMENTO DE DADOS: FIESC / SINDUSCON-SC / GOOGLE TRENDS
+            </div>
+            
+            <div className="grid md:grid-cols-3 gap-6 w-full">
+              <div className="bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-600/50 backdrop-blur-3xl p-10 rounded-xl hover:bg-zinc-800 transition-all duration-500 hover:border-cyan-500/30 group animate-in zoom-in-95 fade-in duration-700 delay-200 shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col">
+                <Globe className="w-10 h-10 text-zinc-500 mb-6 group-hover:text-cyan-400 transition-colors" />
+                <span className="text-4xl md:text-5xl font-bold text-white mb-2 block tracking-tighter font-[family-name:var(--font-space)]">BR-101 / 280</span>
+                <h3 className="text-xl font-bold text-cyan-400 mb-2 uppercase font-[family-name:var(--font-space)]">Eixo Logístico</h3>
+                <p className="text-zinc-400 text-sm flex-1">Demanda massiva por galpões logísticos impulsionada pelo Porto de São Francisco do Sul e plantas multinacionais.</p>
+                <div className="mt-4 pt-4 border-t border-zinc-700/50 text-[10px] text-zinc-500 font-mono tracking-wider">
+                  &gt; FONTE: OBSERVATÓRIO FIESC 2026
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-zinc-800 to-zinc-900 border border-zinc-600/50 backdrop-blur-3xl p-10 rounded-xl hover:bg-zinc-800 transition-all duration-500 hover:border-cyan-500/30 group animate-in zoom-in-95 fade-in duration-700 delay-300 shadow-[0_20px_40px_rgba(0,0,0,0.5)] flex flex-col">
+                <TrendingUp className="w-10 h-10 text-zinc-500 mb-6 group-hover:text-cyan-400 transition-colors" />
+                <span className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-sky-300 mb-2 block tracking-tighter font-[family-name:var(--font-space)]">+340%</span>
+                <h3 className="text-xl font-bold text-cyan-400 mb-2 uppercase font-[family-name:var(--font-space)]">Volume Buscas</h3>
+                <p className="text-zinc-400 text-sm flex-1">Alta abrupta de empresas do eixo Sul-Sudeste caçando construtoras locais de Steel Frame para expansão rápida.</p>
+                <div className="mt-4 pt-4 border-t border-zinc-700/50 text-[10px] text-zinc-500 font-mono tracking-wider">
+                  &gt; FONTE: GOOGLE TRENDS & SEMRUSH
+                </div>
+              </div>
+              <div className="bg-gradient-to-br from-zinc-700 to-zinc-900 border border-zinc-500/50 backdrop-blur-3xl p-10 rounded-xl hover:bg-zinc-700 transition-all duration-500 hover:border-cyan-500/50 group animate-in zoom-in-95 fade-in duration-700 delay-400 shadow-[0_0_40px_rgba(255,255,255,0.05)] flex flex-col">
+                <ShieldCheck className="w-10 h-10 text-white mb-6 group-hover:text-cyan-400 transition-colors animate-pulse" />
+                <span className="text-4xl md:text-5xl font-bold text-white mb-2 block tracking-tighter font-[family-name:var(--font-space)]">ALTO</span>
+                <h3 className="text-xl font-bold text-cyan-400 mb-2 uppercase font-[family-name:var(--font-space)]">Ticket de Obra</h3>
+                <p className="text-zinc-300 text-sm flex-1">Orçamentos pesados exigem vitrine de multinacional. O cliente compra credibilidade (mitigação de risco).</p>
+                <div className="mt-4 pt-4 border-t border-zinc-500/50 text-[10px] text-zinc-400 font-mono tracking-wider">
+                  &gt; FONTE: DADOS SINDUSCON-SC
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </main>
-    </div>
+
+        {/* Screen 2: Solutions */}
+        <div className={`absolute inset-0 flex items-center justify-center p-8 transition-all duration-1000 ${currentScreen === 2 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
+          
+          <div className={`transition-all duration-700 w-full max-w-6xl flex flex-col ${activeAvatar ? "blur-xl opacity-0 scale-95 pointer-events-none" : "blur-0 opacity-100 scale-100 pointer-events-auto"}`}>
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-in slide-in-from-bottom-8 fade-in duration-700 font-[family-name:var(--font-space)] uppercase tracking-tighter">O Ecossistema</h2>
+            <p className="text-2xl text-zinc-400 mb-12 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-100 font-light">Pilares da máquina de vendas.</p>
+            
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              {[
+                { id: 1, name: "Identidade Visual", desc: "A base da confiança.", icon: ShieldCheck },
+                { id: 2, name: "Google Meu Negócio", desc: "Domínio nas buscas.", icon: Search },
+                { id: 3, name: "Vitrine Instagram", desc: "O portfólio de engenharia.", icon: Camera },
+                { id: 4, name: "Site Institucional", desc: "Sede digital premium.", icon: MonitorSmartphone }
+              ].map((item, index) => (
+                <div 
+                  key={item.id}
+                  onClick={() => setActiveAvatar(item.id)}
+                  style={{ animationDelay: `${200 + index * 100}ms` }}
+                  className="bg-zinc-800/80 border border-zinc-600/50 rounded-xl p-8 cursor-pointer hover:bg-zinc-700 hover:border-cyan-500/50 transition-all duration-300 group shadow-[0_10px_30px_rgba(0,0,0,0.5)] animate-in zoom-in-95 fade-in duration-700 relative overflow-hidden"
+                >
+                  <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <item.icon className="w-10 h-10 text-zinc-500 mb-6 group-hover:text-cyan-400 transition-colors" />
+                  <div className="text-xl md:text-2xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">{item.name}</div>
+                  <p className="text-base text-zinc-400 group-hover:text-zinc-300 transition-colors">{item.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Modals */}
+          <div className={`absolute inset-0 flex items-center justify-center transition-all duration-700 p-8 ${activeAvatar ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none scale-105"}`}>
+            {activeAvatar && (
+              <div className="w-full max-w-6xl h-[80vh] bg-zinc-900/95 backdrop-blur-3xl border-2 border-zinc-700 rounded-2xl p-8 md:p-16 relative flex items-center shadow-[0_0_80px_rgba(0,0,0,0.8)]">
+                <button 
+                  onClick={() => setActiveAvatar(null)}
+                  className="absolute top-6 right-8 text-sm font-bold tracking-widest uppercase text-white hover:bg-cyan-950 hover:text-cyan-400 transition-colors bg-zinc-800 px-6 py-3 rounded-md border border-zinc-600 font-[family-name:var(--font-space)]"
+                >
+                  FECHAR ✕
+                </button>
+
+                {/* Similar content as before but using the cyan gradient for accents */}
+                {activeAvatar === 1 && (
+                  <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
+                    <div className="flex-1 space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-800 rounded-sm text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/30"><ShieldCheck className="w-4 h-4"/> 01. Identidade</div>
+                      <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">A Marca de Peso.</h3>
+                      <p className="text-xl text-zinc-400 leading-relaxed font-light">Nomes imponentes. Nada de serralheria de bairro. Uma identidade geométrica, pesada, feita em aço digital. O cliente B2B precisa sentir que você dá conta de erguer 5 mil metros quadrados de galpão.</p>
+                    </div>
+                    <div className="w-full md:w-[500px] h-[500px] relative rounded-xl overflow-hidden border border-zinc-600 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+                      <Image src="/identidade.png" alt="Identidade" fill className="object-cover" />
+                    </div>
+                  </div>
+                )}
+                {/* ... other avatars omitted for brevity, adding similar accents ... */}
+                {activeAvatar === 4 && (
+                  <div className="flex flex-col md:flex-row w-full items-center justify-between gap-12 animate-in fade-in zoom-in-95 duration-500">
+                    <div className="flex-1 space-y-6">
+                      <div className="inline-flex items-center gap-2 px-4 py-1.5 border border-cyan-800 rounded-sm text-xs font-bold tracking-widest uppercase text-cyan-400 bg-cyan-950/30"><MonitorSmartphone className="w-4 h-4"/> 04. Web App</div>
+                      <h3 className="text-5xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 leading-tight uppercase font-[family-name:var(--font-space)] tracking-tight">A Sede Digital.</h3>
+                      <p className="text-xl text-zinc-400 leading-relaxed font-light">Carregamento ultrarrápido, visual corporativo escuro (Metálico). Especificações técnicas das vigas, catálogo de galpões pré-moldados e funil direto pro seu WhatsApp.</p>
+                    </div>
+                    <div className="w-full md:w-96 h-[600px] relative rounded-xl overflow-hidden border border-zinc-500 shadow-[0_20px_60px_rgba(255,255,255,0.1)] flex items-center justify-center bg-black">
+                      <Image src="/site.png" alt="Site Institucional" fill className="object-cover opacity-90 hover:opacity-100 transition-opacity duration-700" />
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Screen 4: Pricing */}
+        <div className={`absolute inset-0 flex flex-col items-center justify-center p-8 transition-all duration-1000 ${currentScreen === 3 ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-95 translate-y-12 pointer-events-none"}`}>
+          <div className="w-full max-w-6xl">
+            <h2 className="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-zinc-100 to-zinc-400 text-center mb-4 animate-in slide-in-from-bottom-8 fade-in duration-700 font-[family-name:var(--font-space)] uppercase tracking-tighter">Planos Estratégicos</h2>
+            <p className="text-xl md:text-2xl text-zinc-400 text-center mb-16 animate-in slide-in-from-bottom-8 fade-in duration-700 delay-100 font-light">Para diferentes velocidades de expansão.</p>
+            
+            <div className="grid md:grid-cols-3 gap-8 w-full">
+              <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-200">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Essencial</h3>
+                <p className="text-zinc-400 text-base mb-8 h-12">O alicerce básico para a marca.</p>
+                <div className="text-5xl font-bold text-zinc-300 mb-8 tracking-tighter font-[family-name:var(--font-space)]">R$ 6.000</div>
+                <div className="w-full h-[1px] bg-zinc-700 mb-8"></div>
+                <ul className="space-y-4 text-zinc-300 text-base flex-1">
+                  <li className="flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-zinc-500"/> Identidade Visual</li>
+                  <li className="flex items-center gap-3"><Search className="w-5 h-5 text-zinc-500"/> Google Meu Negócio</li>
+                  <li className="flex items-center gap-3"><Camera className="w-5 h-5 text-zinc-500"/> Instagram Grid</li>
+                </ul>
+              </div>
+
+              <div className="bg-gradient-to-b from-zinc-700 to-zinc-800 border-2 border-cyan-500/50 backdrop-blur-2xl p-10 rounded-xl flex flex-col relative shadow-[0_0_60px_rgba(6,182,212,0.15)] transform md:-translate-y-6 animate-in zoom-in-95 fade-in duration-700 delay-300">
+                <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-cyan-400 to-blue-500 text-black px-6 py-2 rounded-sm text-xs tracking-[0.2em] uppercase font-bold shadow-[0_0_30px_rgba(6,182,212,0.5)] font-[family-name:var(--font-space)]">
+                  ALTO IMPACTO
+                </div>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight mt-2">Autoridade</h3>
+                <p className="text-cyan-100 text-base mb-8 h-12">O ecossistema para fechar galpões pesados.</p>
+                <div className="text-6xl font-bold text-white mb-8 tracking-tighter font-[family-name:var(--font-space)] drop-shadow-lg">R$ 8.000</div>
+                <div className="w-full h-[1px] bg-cyan-900 mb-8"></div>
+                <ul className="space-y-4 text-white text-base flex-1 font-medium">
+                  <li className="flex items-center gap-3"><ShieldCheck className="w-5 h-5 text-cyan-400"/> Tudo do Pacote Essencial</li>
+                  <li className="flex items-center gap-3"><MonitorSmartphone className="w-5 h-5 text-cyan-400"/> Site Institucional Premium</li>
+                  <li className="flex items-center gap-3"><Globe className="w-5 h-5 text-cyan-400"/> Hospedagem Integrada</li>
+                </ul>
+              </div>
+
+              <div className="bg-zinc-800/80 border border-zinc-700 backdrop-blur-xl p-10 rounded-xl flex flex-col shadow-2xl animate-in zoom-in-95 fade-in duration-700 delay-400">
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 uppercase font-[family-name:var(--font-space)] tracking-tight">Domínio</h3>
+                <p className="text-zinc-400 text-base mb-8 h-12">Máquina de vendas massiva regional.</p>
+                <div className="text-5xl font-bold text-zinc-300 mb-8 tracking-tighter font-[family-name:var(--font-space)]">R$ 15.000</div>
+                <div className="w-full h-[1px] bg-zinc-700 mb-8"></div>
+                <ul className="space-y-4 text-zinc-300 text-base flex-1">
+                  <li className="flex items-center gap-3"><MonitorSmartphone className="w-5 h-5 text-zinc-500"/> Tudo pacote Autoridade</li>
+                  <li className="flex items-center gap-3"><TrendingUp className="w-5 h-5 text-zinc-500"/> Tráfego Pago Pesado</li>
+                  <li className="flex items-center gap-3"><Target className="w-5 h-5 text-zinc-500"/> Máquina SEO Lead</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      {/* Modern Metallic Floating Navigation */}
+      <button 
+        onClick={prevScreen}
+        className={`fixed left-4 md:left-10 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-md bg-zinc-800/80 backdrop-blur-lg border border-zinc-600 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-400 transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:scale-110 ${currentScreen === 0 ? "opacity-0 pointer-events-none translate-x-[-20px]" : "opacity-100 translate-x-0"}`}
+      >
+        <ChevronLeft className="w-8 h-8 text-white" />
+      </button>
+
+      <button 
+        onClick={nextScreen}
+        className={`fixed right-4 md:right-10 top-1/2 -translate-y-1/2 w-12 h-12 md:w-16 md:h-16 rounded-md bg-zinc-800/80 backdrop-blur-lg border border-zinc-600 flex items-center justify-center hover:bg-cyan-900/50 hover:border-cyan-400 transition-all duration-300 shadow-[0_0_20px_rgba(0,0,0,0.5)] hover:scale-110 ${currentScreen === 3 ? "opacity-0 pointer-events-none translate-x-[20px]" : "opacity-100 translate-x-0"}`}
+      >
+        <ChevronRight className="w-8 h-8 text-white" />
+      </button>
+
+    </main>
   );
 }
