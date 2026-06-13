@@ -68,7 +68,7 @@ const works = [
   { title: "Condomínio Empresarial", location: "Joinville, SC", area: "5.200m²", tag: "Corporativo" },
 ];
 
-export default function PreviewSiteRudinei() {
+export default function PreviewSiteAcosGalpoes() {
   const [slide, setSlide] = useState(0);
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -105,7 +105,7 @@ export default function PreviewSiteRudinei() {
               <span className="font-black text-black transform -rotate-45 text-sm">R</span>
             </div>
             <div>
-              <span className="font-black text-xl tracking-tighter text-white uppercase">RUDINEI</span>
+              <span className="font-black text-xl tracking-tighter text-white uppercase">AÇOS & GALPÕES</span>
               <span className="text-cyan-400 font-light text-xl"> ENG.</span>
             </div>
           </div>
@@ -366,7 +366,7 @@ export default function PreviewSiteRudinei() {
             <h4 className="text-white font-bold uppercase tracking-widest text-xs mb-6">Contato</h4>
             <ul className="space-y-3 text-zinc-500 text-sm">
               <li>(47) 9 9999-9999</li>
-              <li>contato@rudineieng.com.br</li>
+              <li>contato@acosgalpoes.com.br</li>
               <li>Araquari, SC — Brasil</li>
             </ul>
             <button className="mt-6 bg-cyan-500 text-black px-6 py-3 font-bold uppercase tracking-wider text-sm hover:bg-cyan-400 transition-colors w-full">
@@ -376,7 +376,7 @@ export default function PreviewSiteRudinei() {
         </div>
         <div className="border-t border-zinc-900 py-6">
           <p className="text-center text-zinc-600 text-xs uppercase tracking-widest">
-            © 2026 Rudinei Engenharia — Steel Frame · CREA/SC
+            © 2026 Aços e Galpões SC — Steel Frame · CREA/SC
           </p>
         </div>
       </footer>
